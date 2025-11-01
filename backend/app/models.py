@@ -1,11 +1,15 @@
-# app/models.py
-from sqlalchemy import Column, Integer, String
+# backend/app/models.py
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from .database import Base
 
-class Connection(Base):
-    __tablename__ = "connections"
+class TCPConnectionDemo(Base):
+    __tablename__ = "tcp_connections_demo"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    host = Column(String)
-    port = Column(Integer)
+    remote_ip = Column(String(45), nullable=False, index=True)
+    remote_port = Column(Integer, nullable=False)
+    local_ip = Column(String(45), nullable=False)
+    local_port = Column(Integer, nullable=False)
+    created_at = Column(DateTime, nullable=False)
+    disconnected_at = Column(DateTime) # 可以为 NULL
+    last_active_at = Column(DateTime, nullable=False)
