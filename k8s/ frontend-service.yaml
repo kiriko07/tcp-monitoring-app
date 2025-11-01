@@ -1,0 +1,15 @@
+# k8s/frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: tcp-monitoring
+spec:
+  type: NodePort # 在集群外部通过 NodePort 访问
+  selector:
+    app: frontend # 选择带有 app:frontend 标签的 Pod
+  ports:
+    - protocol: TCP
+      port: 80    # Service 对外暴露的端口
+      targetPort: 80 # Service 转发请求到 Pod 的端口
+      # nodePort: 30001 # 可以指定固定的 NodePort，不指定则系统自动分配

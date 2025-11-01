@@ -1,0 +1,13 @@
+# k8s/backend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: tcp-monitoring
+spec:
+  selector:
+    app: backend # 选择带有 app:backend 标签的 Pod
+  ports:
+    - protocol: TCP
+      port: 8000  # Service 对外暴露的端口
+      targetPort: 8000 # Service 转发请求到 Pod 的端口
